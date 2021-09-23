@@ -1,26 +1,51 @@
+import java.util.Optional;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Posicao posicaoLimite = new Posicao(5,5);
+        int x, y, sondaX, sondaY;
+        char charDirecao;
+        boolean acabou = false;
+        Scanner scan = new Scanner(System.in);
+        Printer.print("Digite as coordenadas do limite do planalto");
+        x = scan.nextInt();
+        y = scan.nextInt();
+        Posicao posicaoLimite = new Posicao(x,y);
         TorreControle torreControle = new TorreControle(posicaoLimite);
 
-        Posicao posicaoSonda1 = new Posicao(1,2);
-        torreControle.posicionaSonda(posicaoSonda1, Direcao.N);
-//        LMLMLMLMM
-        torreControle.executaComando(Comando.L);
-        torreControle.executaComando(Comando.M);
-        torreControle.executaComando(Comando.L);
-        torreControle.executaComando(Comando.M);
-        torreControle.executaComando(Comando.L);
-        torreControle.executaComando(Comando.M);
-        torreControle.executaComando(Comando.L);
-        torreControle.executaComando(Comando.M);
-        torreControle.executaComando(Comando.M);
+        while (scan.hasNext() && !acabou){
+            Printer.print("Digite as coordenadas iniciais e a direção da sonda");
+            sondaX = scan.nextInt();
+            sondaY = scan.nextInt();
+            Posicao posSonda = new Posicao(sondaX,sondaY);
 
-        Posicao posicaoEsperadaSonda1 = new Posicao(1,3);
-//        System.out.println(torreControle.temNessaPosicao(posicaoEsperadaSonda1));
+            charDirecao = scan.next().charAt(0);
+            Optional<Direcao> optionalDirecao = Tradutor.getDirecao(charDirecao);
+
+            if(optionalDirecao.isEmpty()){
+                Printer.print("Digite uma direção correta");
+                continue;
+            }
+
+            Direcao direcao = optionalDirecao.get();
+
+            torreControle.posicionaSonda(posSonda, direcao);
+
+            Printer.print("Digite os comandos para sua sonda");
+
+            String command = scan.next();
+            command.chars().mapToObj(c -> (char) c).forEach(cmd -> {
+                Optional<Comando> optionalComando = Tradutor.getComandos(cmd);
+                optionalComando.ifPresent(torreControle::executaComando);
+            });
+
+            Printer.print("Acabou?");
+            String res = scan.next();
+            acabou = res.equals("S");
+
+        }
         torreControle.printPlanalto();
     }
 }

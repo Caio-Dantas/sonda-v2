@@ -14,8 +14,7 @@ public class TorreControle {
     public void executaComando(Comando comando){
         comando.executa(this);
     }
-
-
+    
     public void printPlanalto(){
         System.out.println(planalto.toString());
     }
