@@ -12,6 +12,10 @@ public class Sonda {
         return posicaoAtual;
     }
 
+    public Direcao getDirecao(){
+        return this.direcao;
+    }
+
     public void rotateLeft(){
         this.direcao = direcao.left();
     }

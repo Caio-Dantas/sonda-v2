@@ -20,6 +20,7 @@ public class Main {
         torreControle.executaComando(Comando.M);
 
         Posicao posicaoEsperadaSonda1 = new Posicao(1,3);
-        System.out.println(torreControle.temNessaPosicao(posicaoEsperadaSonda1));
+//        System.out.println(torreControle.temNessaPosicao(posicaoEsperadaSonda1));
+        torreControle.printPlanalto();
     }
 }

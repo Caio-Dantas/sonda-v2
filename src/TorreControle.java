@@ -1,5 +1,5 @@
 public class TorreControle {
-    private Planalto planalto;
+    private final Planalto planalto;
     private Sonda sonda;
 
     public TorreControle(Posicao posicaoLimite){
@@ -8,15 +8,16 @@ public class TorreControle {
 
     public void posicionaSonda(Posicao posicao, Direcao direcao){
         this.sonda = new Sonda(posicao, direcao);
-        this.planalto.insereSonda(posicao);
+        this.planalto.insereSonda(sonda);
     }
 
     public void executaComando(Comando comando){
         comando.executa(this);
     }
 
-    public boolean temNessaPosicao(Posicao posicao){
-        return planalto.existeSonda(posicao);
+
+    public void printPlanalto(){
+        System.out.println(planalto.toString());
     }
 
     // TODO arrumar esse nome
@@ -29,9 +30,11 @@ public class TorreControle {
     }
 
     public void moveSonda(){
-        this.planalto.removeSonda(this.sonda.getPosicaoAtual());
-        this.sonda.move();
-        this.planalto.insereSonda(this.sonda.getPosicaoAtual());
+        if(this.planalto.posicaoValida(sonda.getPosicaoFutura())){
+            this.planalto.removeSonda(this.sonda);
+            this.sonda.move();
+            this.planalto.insereSonda(this.sonda);
+        }
     }
 
 }
