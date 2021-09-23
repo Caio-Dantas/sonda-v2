@@ -15,7 +15,7 @@ public class Main {
         Posicao posicaoLimite = new Posicao(x,y);
         TorreControle torreControle = new TorreControle(posicaoLimite);
 
-        while (scan.hasNext() && !acabou){
+        while (!acabou){
             Printer.print("Digite as coordenadas iniciais e a direção da sonda");
             sondaX = scan.nextInt();
             sondaY = scan.nextInt();
