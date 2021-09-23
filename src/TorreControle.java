@@ -8,6 +8,15 @@ public class TorreControle {
 
     public void posicionaSonda(Posicao posicao, Direcao direcao){
         this.sonda = new Sonda(posicao, direcao);
+        this.planalto.insereSonda(posicao);
+    }
+
+    public void executaComando(Comando comando){
+        comando.executa(this);
+    }
+
+    public boolean temNessaPosicao(Posicao posicao){
+        return planalto.existeSonda(posicao);
     }
 
     // TODO arrumar esse nome
@@ -20,7 +29,9 @@ public class TorreControle {
     }
 
     public void moveSonda(){
+        this.planalto.removeSonda(this.sonda.getPosicaoAtual());
         this.sonda.move();
+        this.planalto.insereSonda(this.sonda.getPosicaoAtual());
     }
 
 }

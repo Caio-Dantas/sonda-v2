@@ -3,7 +3,7 @@ public enum Direcao {
     N{
         @Override
         public Posicao getDelta() {
-            //TODO
+            return new Posicao(0,1);
         }
 
         @Override
@@ -19,7 +19,7 @@ public enum Direcao {
     E{
         @Override
         public Posicao getDelta() {
-            //TODO
+            return new Posicao(1,0);
         }
 
         @Override
@@ -35,7 +35,7 @@ public enum Direcao {
     S{
         @Override
         public Posicao getDelta() {
-            //TODO
+            return new Posicao(0,-1);
         }
 
         @Override
@@ -51,7 +51,7 @@ public enum Direcao {
     O{
         @Override
         public Posicao getDelta() {
-            //TODO
+            return new Posicao(-1,0);
         }
 
         @Override

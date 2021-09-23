@@ -1,26 +1,31 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class Planalto {
 
-    private final int[][] solo;
+    private final Posicao posicaoLimite;
+    Set<Posicao> posicoesOcupadas = new HashSet<>();
 
     public Planalto(Posicao posicaoLimite){
-        this.solo = new int[posicaoLimite.getX()][posicaoLimite.getY()];
+        this.posicaoLimite = posicaoLimite;
     }
 
     public boolean existeSonda(Posicao posicao){
-        return this.solo[posicao.getX()][posicao.getY()] == 1;
+        return this.posicoesOcupadas.contains(posicao);
     }
 
     public boolean estaNoPlanalto(Posicao posicao){
-        boolean limiteSuperior = posicao.getX() < solo.length && posicao.getY() < solo[0].length;
+        boolean limiteSuperior = posicao.getX() <= this.posicaoLimite.getX()
+                && posicao.getY() <= this.posicaoLimite.getY();
         boolean limiteInferior = posicao.getX() > 0 && posicao.getY() > 0;
         return limiteInferior && limiteSuperior;
     }
 
     public void insereSonda(Posicao posicao){
-        this.solo[posicao.getX()][posicao.getY()] = 1;
+        this.posicoesOcupadas.add(posicao);
     }
 
     public void removeSonda(Posicao posicao){
-        this.solo[posicao.getX()][posicao.getY()] = 0;
+        this.posicoesOcupadas.remove(posicao);
     }
 }
