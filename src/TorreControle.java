@@ -1,3 +1,5 @@
+import java.util.Optional;
+
 public class TorreControle {
     private final Planalto planalto;
     private Sonda sonda;
@@ -6,9 +8,12 @@ public class TorreControle {
         this.planalto = new Planalto(posicaoLimite);
     }
 
-    public void posicionaSonda(Posicao posicao, Direcao direcao){
+    public Optional<Posicao> posicionaSonda(Posicao posicao, Direcao direcao){
+        if(!this.planalto.posicaoValida(posicao)) return Optional.empty();
+
         this.sonda = new Sonda(posicao, direcao);
         this.planalto.insereSonda(sonda);
+        return Optional.of(posicao);
     }
 
     public void executaComando(Comando comando){

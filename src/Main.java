@@ -31,7 +31,14 @@ public class Main {
 
             Direcao direcao = optionalDirecao.get();
 
-            torreControle.posicionaSonda(posSonda, direcao);
+            Optional<Posicao> optionalPosicao = torreControle.posicionaSonda(posSonda, direcao);
+
+            if(optionalPosicao.isEmpty()){
+                Printer.print("Posição inválida");
+                continue;
+            }else{
+                Printer.print("Sonda posicionada");
+            }
 
             Printer.print("Digite os comandos para sua sonda");
 
@@ -41,9 +48,9 @@ public class Main {
                 optionalComando.ifPresent(torreControle::executaComando);
             });
 
-            Printer.print("Acabou?");
+            Printer.print("Acabou? Y ou N");
             String res = scan.next();
-            acabou = res.equals("S");
+            acabou = res.equals("Y") || res.equals("y");
 
         }
         torreControle.printPlanalto();
