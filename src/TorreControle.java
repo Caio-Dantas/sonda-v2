@@ -19,7 +19,6 @@ public class TorreControle {
         System.out.println(planalto.toString());
     }
 
-    // TODO arrumar esse nome
     public void rotacionaSondaLeft(){
         this.sonda.rotateLeft();
     }
