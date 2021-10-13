@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class TorreControle {
     private final Planalto planalto;
     private Sonda sonda;
@@ -8,16 +6,19 @@ public class TorreControle {
         this.planalto = new Planalto(posicaoLimite);
     }
 
-    public Optional<Posicao> posicionaSonda(Posicao posicao, Direcao direcao){
-        if(!this.planalto.posicaoValida(posicao)) return Optional.empty();
+    public void posicionaSonda(Posicao posicao, Direcao direcao){
+        if(!this.planalto.estaNoPlanalto(posicao)) throw new IllegalArgumentException("Posição inválida");
 
         this.sonda = new Sonda(posicao, direcao);
         this.planalto.insereSonda(sonda);
-        return Optional.of(posicao);
     }
 
     public void executaComando(Comando comando){
-        comando.executa(this);
+        switch (comando){
+            case L -> this.rotacionaSondaLeft();
+            case R -> this.rotacionaSondaRight();
+            case M -> this.moveSonda();
+        }
     }
     
     public void printPlanalto(){
@@ -33,7 +34,7 @@ public class TorreControle {
     }
 
     public void moveSonda(){
-        if(this.planalto.posicaoValida(sonda.getPosicaoFutura())){
+        if(this.planalto.estaNoPlanalto(sonda.getPosicaoFutura())){
             this.planalto.removeSondaDaPosicao(this.sonda.getPosicaoAtual());
             this.sonda.move();
             this.planalto.insereSonda(this.sonda);

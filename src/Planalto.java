@@ -10,10 +10,6 @@ public class Planalto {
         this.posicaoLimite = posicaoLimite;
     }
 
-    public boolean posicaoValida(Posicao posicao){
-        return estaNoPlanalto(posicao);
-    }
-
     public boolean estaNoPlanalto(Posicao posicao){
         boolean limiteSuperior = posicao.getX() <= this.posicaoLimite.getX()
                 && posicao.getY() <= this.posicaoLimite.getY();

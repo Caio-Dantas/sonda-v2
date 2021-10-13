@@ -1,25 +1,25 @@
-import java.util.Optional;
+
 
 public class Tradutor {
 
-    public static Optional<Direcao> getDirecao(char direcao){
+    public static Direcao getDirecao(char direcao){
         direcao = Character.toUpperCase(direcao);
         return switch (direcao) {
-            case 'N' -> Optional.of(Direcao.N);
-            case 'E' -> Optional.of(Direcao.E);
-            case 'S' -> Optional.of(Direcao.S);
-            case 'O' -> Optional.of(Direcao.O);
-            default -> Optional.empty();
+            case 'N' -> Direcao.N;
+            case 'E' -> Direcao.E;
+            case 'S' -> Direcao.S;
+            case 'O' -> Direcao.O;
+            default -> throw new IllegalArgumentException("Direção inválida");
         };
     }
 
-    public static Optional<Comando> getComandos(char comando){
+    public static Comando getComandos(char comando){
         comando = Character.toUpperCase(comando);
         return switch (comando) {
-            case 'L' -> Optional.of(Comando.L);
-            case 'R' -> Optional.of(Comando.R);
-            case 'M' -> Optional.of(Comando.M);
-            default -> Optional.empty();
+            case 'L' -> Comando.L;
+            case 'R' -> Comando.R;
+            case 'M' -> Comando.M;
+            default -> throw new IllegalArgumentException("Comando inválido");
         };
     }
 }

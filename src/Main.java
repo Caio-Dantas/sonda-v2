@@ -22,30 +22,16 @@ public class Main {
             Posicao posSonda = new Posicao(sondaX,sondaY);
 
             charDirecao = scan.next().charAt(0);
-            Optional<Direcao> optionalDirecao = Tradutor.getDirecao(charDirecao);
+            Direcao direcao = Tradutor.getDirecao(charDirecao);
 
-            if(optionalDirecao.isEmpty()){
-                Printer.print("Digite uma direção correta");
-                continue;
-            }
-
-            Direcao direcao = optionalDirecao.get();
-
-            Optional<Posicao> optionalPosicao = torreControle.posicionaSonda(posSonda, direcao);
-
-            if(optionalPosicao.isEmpty()){
-                Printer.print("Posição inválida");
-                continue;
-            }else{
-                Printer.print("Sonda posicionada");
-            }
+            torreControle.posicionaSonda(posSonda, direcao);
 
             Printer.print("Digite os comandos para sua sonda");
 
             String command = scan.next();
             command.chars().mapToObj(c -> (char) c).forEach(cmd -> {
-                Optional<Comando> optionalComando = Tradutor.getComandos(cmd);
-                optionalComando.ifPresent(torreControle::executaComando);
+                Comando comando = Tradutor.getComandos(cmd);
+                torreControle.executaComando(comando);
             });
 
             Printer.print("Acabou? Y ou N");
