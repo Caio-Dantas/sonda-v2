@@ -18,8 +18,14 @@ public class Planalto {
     }
 
     public void insereSonda(Sonda sonda){
+        if(!estaNoPlanalto(sonda.getPosicaoAtual())){
+            Printer.print("Comunicação com a sonda perdida, além dos limites: " + sonda);
+            sonda.desativa();
+            return;
+        }
         if(this.sondasPosicionadas.containsKey(sonda.getPosicaoAtual())) {
             Printer.print("Removendo sonda " + this.sondasPosicionadas.get(sonda.getPosicaoAtual()).toString());
+            this.sondasPosicionadas.get(sonda.getPosicaoAtual()).desativa();
             removeSondaDaPosicao(sonda.getPosicaoAtual());
         }
         this.sondasPosicionadas.put(sonda.getPosicaoAtual(), sonda);

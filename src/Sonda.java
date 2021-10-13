@@ -2,6 +2,7 @@ public class Sonda {
 
     private Posicao posicaoAtual;
     private Direcao direcao;
+    private Boolean estaAtiva = true;
 
     public Sonda(Posicao posicaoInicial, Direcao direcaoInicial){
         this.posicaoAtual = posicaoInicial;
@@ -26,6 +27,14 @@ public class Sonda {
 
     public Posicao getPosicaoFutura(){
         return posicaoAtual.add(direcao.getDelta());
+    }
+
+    public void desativa(){
+        this.estaAtiva = false;
+    }
+
+    public Boolean estaAtiva() {
+        return this.estaAtiva;
     }
 
     @Override
