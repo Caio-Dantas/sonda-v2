@@ -34,7 +34,7 @@ public class TorreControle {
 
     public void moveSonda(){
         if(this.planalto.posicaoValida(sonda.getPosicaoFutura())){
-            this.planalto.removeSonda(this.sonda);
+            this.planalto.removeSondaDaPosicao(this.sonda.getPosicaoAtual());
             this.sonda.move();
             this.planalto.insereSonda(this.sonda);
         }

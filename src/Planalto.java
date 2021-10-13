@@ -11,11 +11,7 @@ public class Planalto {
     }
 
     public boolean posicaoValida(Posicao posicao){
-        return estaNoPlanalto(posicao) && !existeSondaNaPosicao(posicao);
-    }
-
-    public boolean existeSondaNaPosicao(Posicao posicao){
-        return this.sondasPosicionadas.containsKey(posicao);
+        return estaNoPlanalto(posicao);
     }
 
     public boolean estaNoPlanalto(Posicao posicao){
@@ -26,19 +22,22 @@ public class Planalto {
     }
 
     public void insereSonda(Sonda sonda){
+        if(this.sondasPosicionadas.containsKey(sonda.getPosicaoAtual())) {
+            Printer.print("Removendo sonda " + this.sondasPosicionadas.get(sonda.getPosicaoAtual()).toString());
+            removeSondaDaPosicao(sonda.getPosicaoAtual());
+        }
         this.sondasPosicionadas.put(sonda.getPosicaoAtual(), sonda);
     }
 
-    public void removeSonda(Sonda sonda){
-        this.sondasPosicionadas.remove(sonda.getPosicaoAtual());
+    public void removeSondaDaPosicao(Posicao posicao){
+        this.sondasPosicionadas.remove(posicao);
     }
 
     @Override
     public String toString() {
         StringBuilder response = new StringBuilder();
         sondasPosicionadas.forEach((pos, sonda) -> {
-            response.append(pos.toString());
-            response.append(sonda.getDirecao().toString());
+            response.append(sonda.toString());
             response.append("\n");
         });
         return response.toString();

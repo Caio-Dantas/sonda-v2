@@ -12,10 +12,6 @@ public class Sonda {
         return posicaoAtual;
     }
 
-    public Direcao getDirecao(){
-        return this.direcao;
-    }
-
     public void rotateLeft(){
         this.direcao = direcao.left();
     }
@@ -30,5 +26,10 @@ public class Sonda {
 
     public Posicao getPosicaoFutura(){
         return posicaoAtual.add(direcao.getDelta());
+    }
+
+    @Override
+    public String toString() {
+        return posicaoAtual + " " + direcao;
     }
 }
