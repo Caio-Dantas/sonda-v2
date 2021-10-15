@@ -8,7 +8,7 @@ public enum Direcao {
 
         @Override
         public Direcao right() {
-            return Direcao.E;
+            return Direcao.L;
         }
 
         @Override
@@ -16,7 +16,7 @@ public enum Direcao {
             return Direcao.O;
         }
     },
-    E{
+    L {
         @Override
         public Posicao getDelta() {
             return new Posicao(1,0);
@@ -45,7 +45,7 @@ public enum Direcao {
 
         @Override
         public Direcao left() {
-            return Direcao.E;
+            return Direcao.L;
         }
     },
     O{

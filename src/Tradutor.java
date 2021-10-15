@@ -6,7 +6,7 @@ public class Tradutor {
         direcao = Character.toUpperCase(direcao);
         return switch (direcao) {
             case 'N' -> Direcao.N;
-            case 'E' -> Direcao.E;
+            case 'L' -> Direcao.L;
             case 'S' -> Direcao.S;
             case 'O' -> Direcao.O;
             default -> throw new IllegalArgumentException("Direção inválida");
